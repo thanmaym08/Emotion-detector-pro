@@ -1,3 +1,15 @@
+/* Make entire page background black and text white */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000000;
+  color: white;
+  font-family: sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +44,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

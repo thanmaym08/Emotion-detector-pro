@@ -1,0 +1,50 @@
+/* Container for webcam + button */
+.camera-capture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Webcam video box */
+.webcam-video {
+    width: 400px;
+    height: auto;
+    border-radius: 15px;
+    border: 4px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+
+/* Capture button style */
+.capture-button {
+    background: linear-gradient(90deg, #34d399, #06b6d4);
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.capture-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(6, 182, 212, 0.5);
+}
+
+.capture-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Error message text */
+.error-text {
+    margin-top: 10px;
+    color: #f87171;
+    font-size: 14px;
+    text-align: center;
+}

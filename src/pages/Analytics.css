@@ -1,0 +1,109 @@
+/* Style for the main title (h1) */
+.analytics-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Style for the container */
+.analytics-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style for the images and emotions */
+.images-and-emotions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.analytics-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.analytics-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.analytics-emotion {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Chart Styling */
+.emotion-chart {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.recommendations {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.recommendation-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-item h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.recommendation-item p {
+    color: #555;
+}
+
+/* Buttons */
+.toggle-btn,
+.back-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.toggle-btn:hover,
+.back-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Add this to your Analytics.css */
+
+.most-frequent-emotion {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.most-frequent-emotion h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.most-frequent-emotion p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #e0e7ff;
+}

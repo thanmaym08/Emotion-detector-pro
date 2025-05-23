@@ -1,23 +1,86 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# =========================================
+# PYTHON
+# =========================================
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+.env
+.venv/
+venv/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
-# testing
-/coverage
+# PyInstaller artifacts
+*.spec
 
-# production
-/build
+# =========================================
+# NODE.JS
+# =========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
 
-# misc
-.DS_Store
+# Local environment files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# =========================================
+# IDEs / TEXT EDITORS
+# =========================================
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# =========================================
+# OS-SPECIFIC FILES
+# =========================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# =========================================
+# ML / DEEP LEARNING MODELS
+# =========================================
+*.hdf5
+*.ckpt
+*.pb
+*.tflite
+*.pt
+*.onnx
+runs/
+checkpoints/
+logs/
+tensorboard/
+
+# DVC / dataset cache
+.dvc/
+*.csv
+*.tsv
+*.zip
+*.tar.gz
+*.npy
+*.npz
+
+# =========================================
+# REACT / FRONTEND BUILD FILES
+# =========================================
+build/
+.cache/
+.next/
+out/
+coverage/
