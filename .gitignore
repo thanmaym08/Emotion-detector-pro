@@ -59,6 +59,8 @@ Desktop.ini
 *.hdf5
 *.ckpt
 *.pb
+*.pth
+
 *.tflite
 *.pt
 *.onnx
