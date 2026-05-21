@@ -1,5 +1,7 @@
 import os
 import io
+import cv2
+import numpy as np
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -12,6 +14,10 @@ from efficientnet_pytorch import EfficientNet
 import uvicorn
 
 app = FastAPI()
+
+# Load OpenCV face detector (Haar Cascade)
+face_cascade_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
 # Enable CORS for frontend communication
 app.add_middleware(
@@ -54,11 +60,11 @@ if os.path.exists(model_path):
         state_dict = torch.load(model_path, map_location="cpu")
         model.load_state_dict(state_dict)
         model.eval()
-        print("✅ Model loaded successfully.")
+        print("[OK] Model loaded successfully.")
     except Exception as e:
-        print(f"❌ Error loading model: {e}")
+        print(f"[ERROR] Error loading model: {e}")
 else:
-    print(f"⚠️ Model file not found: {model_path}")
+    print(f"[WARNING] Model file not found: {model_path}")
 
 # Define preprocessing
 transform = transforms.Compose([
@@ -80,7 +86,32 @@ async def predict(file: UploadFile = File(...)):
         
         contents = await file.read()
         image = Image.open(io.BytesIO(contents)).convert("RGB")
-        img_tensor = transform(image).unsqueeze(0)
+        
+        # Convert PIL Image to OpenCV numpy array (RGB to BGR)
+        open_cv_image = np.array(image)
+        open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_RGB2BGR)
+        gray = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2GRAY)
+        
+        # Detect faces
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+        
+        if len(faces) > 0:
+            # If multiple faces detected, crop the largest one by area
+            largest_face = max(faces, key=lambda f: f[2] * f[3])
+            x, y, w, h = largest_face
+            
+            # Crop face from original image
+            cropped_face = open_cv_image[y:y+h, x:x+w]
+            
+            # Convert back to PIL Image (BGR to RGB)
+            cropped_face_rgb = cv2.cvtColor(cropped_face, cv2.COLOR_BGR2RGB)
+            image_to_classify = Image.fromarray(cropped_face_rgb)
+            print(f"[INFO] Face detected and cropped at: x={x}, y={y}, w={w}, h={h}")
+        else:
+            image_to_classify = image
+            print("[WARNING] No face detected. Using full image as fallback.")
+
+        img_tensor = transform(image_to_classify).unsqueeze(0)
 
         # Make prediction
         with torch.no_grad():
@@ -101,4 +132,4 @@ async def predict(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
-    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
